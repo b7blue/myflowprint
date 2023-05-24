@@ -60,11 +60,12 @@ func CatchAll(id int, appname string, train bool, catchdone chan struct{}, τbat
 	// 	model.StartCapture_Detect(id, time.Now())
 	// }
 Loop:
-	for packet := range packets {
+	for {
 		select {
 		case <-tc:
 			break Loop
 		default:
+			packet := <-packets
 			if packet.NetworkLayer() != nil && packet.TransportLayer() != nil {
 				if err := w.WritePacket(packet.Metadata().CaptureInfo, packet.Data()); err != nil {
 					log.Fatalf("pcap.WritePacket(): %v", err)

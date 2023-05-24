@@ -1,7 +1,10 @@
 package main
 
 import (
+	"myflowprint/model"
 	_ "myflowprint/model"
+	"myflowprint/monitor"
+	fingerer "myflowprint/p30fingerer"
 )
 
 /*
@@ -14,14 +17,15 @@ import (
 
 func main() {
 	// 测试用，正常应该一次性生成app list
-	// model.NewAppInfo("哔哩哔哩", "tv.danmaku.bili")
+	model.NewAppInfo("京东", "com.jingdong.app.mall")
 
-	// // 生成指纹库
-	// // 取出trainlist中还没capture的，遍历进行fingerer.Finger
-	// fingerer.Finger(2, "哔哩哔哩", "tv.danmaku.bili")
+	// 生成指纹库
+	// 取出trainlist中还没capture的，遍历进行fingerer.Finger
+	fingerer.Finger(5, "京东", "com.jingdong.app.mall")
 
 	// // 取出trainlist还没fingerprint的，遍历进行monitor.CatchSess和flowprintfactory.Fingerprint
-	// monitor.CatchSess(true, 103, "豆瓣_old.pcap")
+	monitor.CatchSess(true, 5, "京东.pcap")
+	// monitor.CatchSess(true, 3, "腾讯新闻.pcap")
 
 	// flowprintfactory.Fingerprint(2, true)
 
