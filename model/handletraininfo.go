@@ -7,7 +7,7 @@ import (
 )
 
 // 将app全部下载进手机之后，用脚本获得所有app名字与包名，写入trainlist
-func NewAppInfo(appname string, packagename string) {
+func NewAppInfo(appname string, packagename string) int {
 	var zerotime time.Time
 	zerotime, err := time.Parse("2006-01-02 15:04:05", "1970-01-01 01:01:01")
 	if err != nil {
@@ -22,6 +22,7 @@ func NewAppInfo(appname string, packagename string) {
 		Start:         zerotime,
 	}
 	db.Create(&thisapp)
+	return thisapp.ID
 }
 
 // 获得所有还没有自动化访问过的app
