@@ -2,17 +2,24 @@ package model
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
 // 将app全部下载进手机之后，用脚本获得所有app名字与包名，写入trainlist
 func NewAppInfo(appname string, packagename string) {
+	var zerotime time.Time
+	zerotime, err := time.Parse("2006-01-02 15:04:05", "1970-01-01 01:01:01")
+	if err != nil {
+		log.Println(err, zerotime)
+	}
 	thisapp := TrainInfo{
 		Appname:     appname,
 		Packagename: packagename,
 		Captured:    false,
 		// Analysed:      false,
 		Fingerprinted: false,
+		Start:         zerotime,
 	}
 	db.Create(&thisapp)
 }

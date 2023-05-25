@@ -15,10 +15,6 @@ import (
 	"github.com/google/gopacket/tcpassembly"
 )
 
-// var HOST net.IP = net.IPv4(192, 168, 137, 135)
-// var iface = flag.String("i", "eth0", "Interface to get packets from")
-// var fname = flag.String("r", "", "Filename to read from, overrides -i")
-// var handle *pcap.Handle
 var err error
 
 var host = layers.NewIPEndpoint(net.IPv4(192, 168, 137, 14))
@@ -64,6 +60,8 @@ func CatchSess(train bool, id int, pcapfile string) {
 		// \Device\NPF_{63523F40-8580-4CD8-9E3F-4DE53B19BEA2}
 		// wifi
 		// \Device\NPF_{F7D6E13E-DAA8-48FE-9AED-DF428409187D}
+		// 公司
+		// \Device\NPF_{62373F76-6A01-47D7-922E-648AE11AC519}
 		// 指定设备抓包
 		log.Printf("Starting capture on interface")
 		handle, err = pcap.OpenLive(`\Device\NPF_{63523F40-8580-4CD8-9E3F-4DE53B19BEA2}`, 65535, true, pcap.BlockForever)

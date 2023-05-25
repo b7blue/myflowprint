@@ -1,6 +1,7 @@
 package main
 
 import (
+	"myflowprint/flowprintfactory"
 	_ "myflowprint/model"
 )
 
@@ -14,16 +15,27 @@ import (
 
 func main() {
 	// 测试用，正常应该一次性生成app list
-	// model.NewAppInfo("哔哩哔哩", "tv.danmaku.bili")
+	// model.NewAppInfo("淘宝", "com.taobao.taobao")
+
+	// devs, _ := pcap.FindAllDevs()
+	// for _, d := range devs {
+	// 	fmt.Println(d.Name, d.Addresses)
+	// }
+	// _, err := pcap.OpenLive(`\Device\NPF_{62373F76-6A01-47D7-922E-648AE11AC519}`, 65535, true, pcap.BlockForever)
+	// if err != nil {
+	// 	log.Println(err)
+	// } else {
+	// 	log.Println(devs[4].Name)
+	// }
 
 	// // 生成指纹库
 	// // 取出trainlist中还没capture的，遍历进行fingerer.Finger
-	// fingerer.Finger(2, "哔哩哔哩", "tv.danmaku.bili")
+	// fingerer.Finger(1, "淘宝", "com.taobao.taobao")
 
-	// // 取出trainlist还没fingerprint的，遍历进行monitor.CatchSess和flowprintfactory.Fingerprint
-	// monitor.CatchSess(true, 103, "豆瓣_old.pcap")
+	// 取出trainlist还没fingerprint的，遍历进行monitor.CatchSess和flowprintfactory.Fingerprint
+	// monitor.CatchSess(true, 1, "淘宝.pcap")
 
-	// flowprintfactory.Fingerprint(2, true)
+	flowprintfactory.Fingerprint(1, true)
 
 	// s := ""
 

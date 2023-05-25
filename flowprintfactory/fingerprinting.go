@@ -191,11 +191,12 @@ func getMaximalCliques(vertex []*DstCluster, edge [][]int) [][]model.Flowprint {
 	if err := ioutil.WriteFile("extension.txt", []byte(builder.String()[:builder.Len()-1]), 0666); err != nil {
 		fmt.Println("Writefile Error =", err)
 	}
-	cmd := exec.Command("python", "C:/Users/70408/go/src/myflowprint/flowprintfactory/getMaximalCliques.py")
+	//
+	cmd := exec.Command("python", "flowprintfactory/getMaximalCliques.py")
 	raw, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Println("py脚本调用出错")
-		log.Fatalln(err)
+		log.Fatalln(err, string(raw))
 	}
 	/*
 		[3, 1, 2]
