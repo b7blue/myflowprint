@@ -7,9 +7,16 @@ import (
 	"myflowprint/model"
 )
 
+const float64EqualityThreshold = 1e-9
+
+func almostEqual(a, b float64) bool {
+	return math.Abs(a-b) <= float64EqualityThreshold
+}
+
 func unionSameFingerprint(flowprints [][]model.Flowprint) [][]model.Flowprint {
 	// 将所有指纹做相似度分析
 	num := len(flowprints)
+	orinum := num
 	// 记录没有被合并的剩下的
 	exist := make([]bool, num)
 	for i := range exist {
@@ -36,6 +43,10 @@ func unionSameFingerprint(flowprints [][]model.Flowprint) [][]model.Flowprint {
 			re = append(re, flowprints[i])
 		}
 	}
+	if orinum == num {
+		return re
+	}
+	re = unionSameFingerprint(re)
 	log.Println("根据相似度", τsimilarity, "合并后的指纹个数：", num)
 	return re
 }
@@ -54,7 +65,7 @@ func getAppFingerprint(flowprints [][]model.Flowprint, appname string) [][]model
 	return re
 }
 
-// 计算两个指纹之间的雅卡德系数, 得出是否属于同一app
+// 计算两个指纹之间的雅卡德系数, 用于合并app的多个指纹
 func IsSameByJaccard_One(allfp [][]model.Flowprint, i1, i2 int) bool {
 	// intersection, union
 	f1, f2 := allfp[i1], allfp[i2]
@@ -78,15 +89,15 @@ func IsSameByJaccard_One(allfp [][]model.Flowprint, i1, i2 int) bool {
 	jaccard := float64(intersection) / float64(union)
 	// 将并集放在f1中
 
-	if math.Max(jaccard, τsimilarity) == jaccard {
+	if almostEqual(math.Max(jaccard, τsimilarity), jaccard) {
 		for _, f := range f2 {
 			dst := ip_port2dst(f.Dip, f.Dport)
-			if m[dst] == 2 {
+			if m[dst] == 1 {
 				f1 = append(f1, f)
 			}
 		}
 		allfp[i1] = f1
-		log.Printf("两个指纹的相似度为%.3f, 判断为相似，合并后的指纹含有%d个网络目的地，指纹内容如下：\n%v", jaccard, len(f1), f1)
+		// log.Printf("两个指纹的相似度为%.3f, 判断为相似，合并后的指纹含有%d个网络目的地，指纹内容如下：\n%v", jaccard, len(f1), f1)
 		return true
 	}
 	return false

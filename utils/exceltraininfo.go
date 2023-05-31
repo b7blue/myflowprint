@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"myflowprint/model"
-	"strconv"
 
 	"github.com/xuri/excelize/v2"
 )
@@ -33,17 +32,20 @@ func Excel_2_train_info(filepath string) []model.TrainInfo {
 	}
 
 	info := make([]model.TrainInfo, len(rows))
-
+	num := 0
 	for i, row := range rows {
-		id, _ := strconv.Atoi(row[0])
-		info[i] = model.TrainInfo{
-			ID:          id,
-			Appname:     row[2],
-			Packagename: row[1],
+		if row[0] != "" {
+			num++
+			info[i] = model.TrainInfo{
+				Appname:     row[1],
+				Packagename: row[0],
+			}
+		} else {
+			break
 		}
 
 	}
-	log.Println("get web infos from xlsx file succeed")
-	return info
+	log.Println("get app infos from xlsx file succeed")
+	return info[:num]
 
 }

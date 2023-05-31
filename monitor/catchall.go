@@ -44,7 +44,7 @@ func CatchAll(id int, appname string, train bool, catchdone chan struct{}, τbat
 	// 打开网卡抓包
 	// \Device\NPF_{63523F40-8580-4CD8-9E3F-4DE53B19BEA2} 笔记本
 	// \Device\NPF_{62373F76-6A01-47D7-922E-648AE11AC519} 公司
-	handle, err := pcap.OpenLive(`\Device\NPF_{62373F76-6A01-47D7-922E-648AE11AC519}`, 65535, true, pcap.BlockForever)
+	handle, err := pcap.OpenLive(`\Device\NPF_{63523F40-8580-4CD8-9E3F-4DE53B19BEA2}`, 65535, true, pcap.BlockForever)
 	if err != nil {
 		log.Fatal(err)
 	}

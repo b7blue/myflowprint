@@ -101,7 +101,7 @@ Loop:
 // 获得一个随机坐标
 // y 200-2150 x 150-950
 func tapRandPos() string {
-	x, y := rand.Intn(1950)+200, rand.Intn(800)+150
+	x, y := rand.Intn(800)+150, rand.Intn(1850)+200
 	fmt.Println("random tap", x, y)
 	return fmt.Sprintf("input tap %d %d", x, y)
 }
@@ -117,7 +117,7 @@ func randTopNav() string {
 func randBottomNav() string {
 	x := rand.Intn(920) + 80
 	fmt.Println("random  bottom x", x)
-	return fmt.Sprintf("input tap %d 2250", x)
+	return fmt.Sprintf("input tap %d 2100", x)
 }
 
 // 改变app联网权限

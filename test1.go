@@ -1,7 +1,8 @@
 package main
 
 import (
-	fingerer "myflowprint/p30fingerer"
+	"fmt"
+	"myflowprint/model"
 )
 
 func main() {
@@ -15,5 +16,11 @@ func main() {
 	// }
 	// fmt.Println(os.IsExist(os.Mkdir("../flowprintservice/detectdata", 0666)))
 
-	fingerer.Install()
+	fpdb := model.GetFingerprintDB()
+	for app, appfp := range fpdb {
+		fmt.Println(app, "的指纹如下：")
+		for i := range appfp {
+			fmt.Printf("%d号指纹包含%d个网络目的地：\n%v\n", i, len(appfp[i]), appfp[i])
+		}
+	}
 }

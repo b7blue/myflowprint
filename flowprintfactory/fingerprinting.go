@@ -15,7 +15,7 @@ import (
 const τwindow = time.Duration(30) * time.Second
 const τbatch = time.Duration(300) * time.Second
 const τcorrelation float64 = 0.1
-const τsimilarity float64 = 0.35
+const τsimilarity float64 = 0.7
 const slicenum = int(τbatch / τwindow)
 
 // 1 聚类
